@@ -1,0 +1,31 @@
+POST http://localhost:3002/api/users
+content-type: application/json
+
+{ 
+ "username": "bbbb",
+ "name": "bbb",
+ "passwordHash": "1234"
+
+}
+
+#########
+
+
+PUT http://localhost:3002/api/users/6391fd271d1e376c237475ec
+content-type: application/json
+
+{ 
+ 
+ "username": "opop",
+ "name": "op",
+ "passwordHash": "fffff"
+
+}
+
+############
+
+GET http://localhost:3002/api/users
+
+###################
+
+GET http://localhost:3002/api/users/63b45bb84367775d0d6d2bdc

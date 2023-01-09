@@ -10,3 +10,7 @@ GET http://localhost:3002/api/notes/638611ab117f4e66b653bb78
 ###
 DELETE http://localhost:3002/api/notes/638611ab117f4e66b653bb78
 
+
+###
+GET http://api.cup2022.ir/api/v1/team
+

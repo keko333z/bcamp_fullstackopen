@@ -1,9 +1,20 @@
 const  mongoose = require("mongoose")
 
 const noteSchema= new mongoose.Schema({
-    title: String,
-    body: String,
-    userId: Number
+    title: {
+      type: String,
+      required: true,
+      minlenght: 8
+    },
+    body:{
+      type: String,
+      required: true,
+      minlenght: 10
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
 })
 noteSchema.set('toJSON', {
     transform: (document, returnedObject) => {
@@ -12,6 +23,7 @@ noteSchema.set('toJSON', {
       delete returnedObject.__v
     }
   })
+  
 const Note= new mongoose.model('Note', noteSchema)
 
 
