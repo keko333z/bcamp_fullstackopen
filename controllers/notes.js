@@ -57,22 +57,25 @@ notesRouter.post('/', async (request, response) => {
   if(!decodedToken || !token){
     response.send('Inexistent or invalid token ')
   }
-  else {
+  else 
+    {
     if(!note.title ||  !note.body){
     response.status(400).json({error: "No se encontro la nota"})
     }else{
-    try {const user= await User.findById(decodedToken.id)
-    const newNote= new Note({ user: user.id, title: note.title, body: note.body})
-    const resp= await newNote.save()
-    user.notes=user.notes.concat(resp.id)
-    const userconid=user.save()
-    response.json(resp)
+    try {
+      const user= await User.findById(decodedToken.id)
+      const newNote= new Note({ user: user.id, title: note.title, body: note.body})
+      const resp= await newNote.save()
+      user.notes=user.notes.concat(resp.id)
+      const userconid=user.save()
+      response.json(resp)
     } catch(e){console.log(`error saving the note ${e}`)}
   
     /*.then(note =>{response.json(note);console.log(response); response.end()})
     .catch(error=>console.log(error))*/
   
 }}})
+
 
 notesRouter.put('/:id', (request, response)=>{
   const id=request.params.id
@@ -92,11 +95,20 @@ notesRouter.put('/:id', (request, response)=>{
   .catch((error)=>console.log(error))
 }})
 
-notesRouter.delete('/:id', (request, response) => {
+notesRouter.delete('/:id', async (request, response) => {
   const param_id= request.params.id;
-  Note.deleteOne({_id: param_id})
-  .then(console.log("record deleted"))
-  .catch((error)=>console.log("something went wrong, error: "+error))
+  try {
+  const note= await Note.findById(param_id)
+  const user= await User.findById(note.user.toString())
+  const newUserNotesArray= user.notes.filter(note=> note.toString()!==param_id)
+  user.notes=newUserNotesArray
+  user.save()
+  await Note.deleteOne({_id: param_id})
+  console.log("record deleted")
+  }
+  catch(error){
+    console.log("something went wrong, error: "+error)
+  }
   /* const id= Number(request.params.id); 
   const note=notes.filter(note => note.id!==id)
   notes=[...note]

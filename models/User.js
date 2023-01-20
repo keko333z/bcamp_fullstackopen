@@ -17,15 +17,18 @@ const userSchema= new mongoose.Schema ({
           }
     ],
     followers: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            _id: false,
+            followerUserId: String,
+            username: String
     }], 
     following: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            _id: false,
+            followingUserId: String,
+            username: String
     }]
 })
 
+ 
 userSchema.set('toJSON', {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id.toString()
@@ -33,9 +36,9 @@ userSchema.set('toJSON', {
       delete returnedObject.__v
       // the passwordHash should not be revealed
       delete returnedObject.passwordHash
-    }
+    } 
   })
-  userSchema.plugin(uniqueValidator)
+   userSchema.plugin(uniqueValidator)
   const User= new mongoose.model('User', userSchema)
 
   module.exports = User

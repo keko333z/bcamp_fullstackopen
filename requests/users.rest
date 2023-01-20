@@ -2,23 +2,27 @@ POST http://localhost:3002/api/users
 content-type: application/json
 
 { 
- "username": "bbbb",
- "name": "bbb",
- "passwordHash": "1234"
-
+"username": "xxxx",
+ "name": "dfg",
+ "passwordHash": "1234",
+ "notes":[],
+ "followers": [],
+ "following": ["63b45bb84367775d0d6d2bdc"]
 }
 
 #########
 
 
-PUT http://localhost:3002/api/users/6391fd271d1e376c237475ec
+PUT http://localhost:3002/api/users/63b45bb84367775d0d6d2bdc
 content-type: application/json
 
 { 
  
- "username": "opop",
- "name": "op",
- "passwordHash": "fffff"
+ "username": "bbbb",
+ "name": "bb",
+ "passwordHash": "1234",
+ "followers": [],
+ "following": []
 
 }
 

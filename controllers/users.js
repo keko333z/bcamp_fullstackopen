@@ -23,19 +23,16 @@ usersRouter.get('/', async(request, response) => {
     response.status(400).end()})*/
 })
 
-
-
 usersRouter.get('/:id', async(request, response) => {
 const id= request.params.id;
 try {
   const userInfo= await User.findById(id)
     .populate('notes',{title:1, body:1})
-    .populate('followers', {username:1, name:1})
-    .populate('following', {username:1, name:1})
+    
   response.json(userInfo)
 }
 catch(error)
-  {
+  { 
   console.log("Something went wrong: "+error)
   response.status(500).end()
 }
@@ -55,7 +52,7 @@ usersRouter.post('/', async (request, response) => {
     const user=request.body
     const saltRounds=10
     const passwordHash= await (bcrypt.hash(user.passwordHash,saltRounds))
-    const newUser= new User({  username: user.username, name: user.name, passwordHash: passwordHash, notes: user.notes})
+    const newUser= new User({  username: user.username, name: user.name, passwordHash: passwordHash, notes: user.notes, followers:user.followers, following: user.following})
     try {const resp= await newUser.save()
     response.json(resp)
     }catch(error){
@@ -66,19 +63,22 @@ usersRouter.post('/', async (request, response) => {
     .catch(error=>console.log(error))*/ 
 })
 
-usersRouter.put('/:id', async (request, response)=>{
+usersRouter.put('/:id', async (request, response)=>{ 
   const id=request.params.id
   const user=request.body
-  const saltRounds=10
+ /* const saltRounds=10
   const passwordHash= await (bcrypt.hash(user.passwordHash,saltRounds))
+  console.log(passwordHash)*/
   const newUser={
     username: user.username,
     name: user.name,
-    passwordHash: passwordHash
+    //passwordHash: passwordHash,
+    
+    followers: user.followers,
+    following: user.following
   }
   const resp= await User.findByIdAndUpdate(id, newUser,{ new: true })
-  response.json(resp)
- 
+  response.json(resp) 
 })
 
 usersRouter.delete('/:id', (request, response) => {

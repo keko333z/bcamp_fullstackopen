@@ -9,7 +9,7 @@ const jwt= require('jsonwebtoken')
 
 
 
-loginRouter.use('/', async (request, response)=>{
+loginRouter.post('/', async (request, response)=>{
 
     const userdata= request.body
     const user= await User.findOne({username: userdata.username})
@@ -26,7 +26,7 @@ const userForToken= {
     id: user.id
 } 
 const token = jwt.sign(userForToken, process.env.SECRET)
-response.send({token: token, username:  user.username, id: user.id, followers: user.followers, following: user.following})
+response.send({token: token, name: user.name, username:  user.username, id: user.id, followers: user.followers, following: user.following, password: user.passwordHash})
 
 })
 
