@@ -25,7 +25,13 @@ const userSchema= new mongoose.Schema ({
             _id: false,
             followingUserId: String,
             username: String
-    }]
+    }],
+    liked: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Note',
+            unique: true
+    }
+    ]
 })
 
  

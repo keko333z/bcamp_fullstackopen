@@ -27,7 +27,7 @@ usersRouter.get('/:id', async(request, response) => {
 const id= request.params.id;
 try {
   const userInfo= await User.findById(id)
-    .populate('notes',{title:1, body:1})
+    .populate('notes',{title:1})
     
   response.json(userInfo)
 }
@@ -58,6 +58,7 @@ usersRouter.post('/', async (request, response) => {
     }catch(error){
       response.send("Something went wrong "+error)
     }
+    
    
     /*.then(note =>{response.json(note);console.log(response); response.end()})
     .catch(error=>console.log(error))*/ 
@@ -75,7 +76,8 @@ usersRouter.put('/:id', async (request, response)=>{
     //passwordHash: passwordHash,
     
     followers: user.followers,
-    following: user.following
+    following: user.following,
+    liked: user.liked
   }
   const resp= await User.findByIdAndUpdate(id, newUser,{ new: true })
   response.json(resp) 

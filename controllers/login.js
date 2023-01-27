@@ -26,7 +26,7 @@ const userForToken= {
     id: user.id
 } 
 const token = jwt.sign(userForToken, process.env.SECRET)
-response.send({token: token, name: user.name, username:  user.username, id: user.id, followers: user.followers, following: user.following, password: user.passwordHash})
+response.send({token: token, name: user.name, username:  user.username, id: user.id, followers: user.followers, following: user.following, password: user.passwordHash, liked: user.liked})
 
 })
 

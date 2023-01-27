@@ -6,6 +6,13 @@ const cors = require('cors')
 const notesRouter=require('./controllers/notes.js')
 const usersRouter=require('./controllers/users.js')
 const loginRouter=require('./controllers/login.js')
+const bodyParser = require('body-parser');
+
+
+
+// Express 4.0
+app.use(bodyParser.json({ limit: '2mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '2mb' }));
 
 
 

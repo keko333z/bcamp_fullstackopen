@@ -2,12 +2,12 @@ POST http://localhost:3002/api/users
 content-type: application/json
 
 { 
-"username": "xxxx",
- "name": "dfg",
+"username": "zzzz",
+ "name": "zz",
  "passwordHash": "1234",
  "notes":[],
  "followers": [],
- "following": ["63b45bb84367775d0d6d2bdc"]
+ "following": []
 }
 
 #########
@@ -32,4 +32,4 @@ GET http://localhost:3002/api/users
 
 ###################
 
-GET http://localhost:3002/api/users/63b45bb84367775d0d6d2bdc
+GET http://localhost:3002/api/users/6399e937227e44d916672b18
