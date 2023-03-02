@@ -13,13 +13,13 @@ content-type: application/json
 #########
 
 
-PUT http://localhost:3002/api/users/63b45bb84367775d0d6d2bdc
+PUT http://localhost:3002/api/users/63d2ebbb531593593ea4eea2
 content-type: application/json
 
 { 
  
- "username": "bbbb",
- "name": "bb",
+ "username": "xcv",
+ "name": "xcv",
  "passwordHash": "1234",
  "followers": [],
  "following": []
@@ -32,4 +32,11 @@ GET http://localhost:3002/api/users
 
 ###################
 
-GET http://localhost:3002/api/users/6399e937227e44d916672b18
+GET http://localhost:3002/api/users/63b45bb84367775d0d6d2bdc
+
+
+################
+
+GET http://localhost:3002/api/comments/userid/6399e937227e44d916672b18
+
+

@@ -1,12 +1,8 @@
 
 const  mongoose = require("mongoose")
 
-const noteSchema= new mongoose.Schema({
-    title: {
-      type: String,
-      required: true,
-      minlenght: 8
-    },
+const commentSchema= new mongoose.Schema({
+    
     body:{
       type: String,
       required: true,
@@ -16,11 +12,13 @@ const noteSchema= new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
-    date: Date,
-    views: Number,
-    likes:  Number
+    note: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Note'
+      }, 
+    date: Date 
 })
-noteSchema.set('toJSON', {
+commentSchema.set('toJSON', {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id
       delete returnedObject._id
@@ -28,8 +26,8 @@ noteSchema.set('toJSON', {
     }
   })
   
-const Note= new mongoose.model('Note', noteSchema)
+const Comment= new mongoose.model('Comment', commentSchema)
 
 
 
-module.exports = Note;
+module.exports = Comment;

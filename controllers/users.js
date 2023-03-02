@@ -1,7 +1,9 @@
-require ("../mongo")
+
+require ("../mongo.js")
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
-const User = require ("../models/User")
+const User = require ("../models/User.js")
+const jwt= require('jsonwebtoken')
 
 
 
@@ -27,7 +29,7 @@ usersRouter.get('/:id', async(request, response) => {
 const id= request.params.id;
 try {
   const userInfo= await User.findById(id)
-    .populate('notes',{title:1})
+    .populate('notes',{title:1, views:1, likes:1, date: 1})
     
   response.json(userInfo)
 }
@@ -52,7 +54,7 @@ usersRouter.post('/', async (request, response) => {
     const user=request.body
     const saltRounds=10
     const passwordHash= await (bcrypt.hash(user.passwordHash,saltRounds))
-    const newUser= new User({  username: user.username, name: user.name, passwordHash: passwordHash, notes: user.notes, followers:user.followers, following: user.following})
+    const newUser= new User({  username: user.username, name: user.name, passwordHash: passwordHash, notes: user.notes, followers:user.followers, following: user.following, liked: []})
     try {const resp= await newUser.save()
     response.json(resp)
     }catch(error){
@@ -80,7 +82,13 @@ usersRouter.put('/:id', async (request, response)=>{
     liked: user.liked
   }
   const resp= await User.findByIdAndUpdate(id, newUser,{ new: true })
-  response.json(resp) 
+  const userForToken= {
+    username: user.username,
+    id: user.id
+  } 
+  const token = jwt.sign(userForToken, process.env.SECRET)
+ 
+  response.json({token: token, name: resp.name, username:  resp.username, id: resp.id, followers: resp.followers, following: resp.following, password: resp.passwordHash, liked: resp.liked}) 
 })
 
 usersRouter.delete('/:id', (request, response) => {

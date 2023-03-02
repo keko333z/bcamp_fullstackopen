@@ -26,3 +26,7 @@ GET http://localhost:3002/api/notes
 
 ###############
 GET http://localhost:3002/api/notes/63cab817cde63b84a626b2c9
+
+##################################
+
+GET http://localhost:3002/api/notes/viewed

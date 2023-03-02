@@ -1,15 +1,24 @@
-require ("../mongo")
+
+
+require ("../mongo.js")
 const express = require('express')
 const  mongoose = require("mongoose")
 const notesRouter = express()
 require('dotenv').config()
 const jwt= require('jsonwebtoken')
-const Note = require ("../models/Note")
-const User = require("../models/User")
+const Note = require ("../models/Note.js")
+const User = require("../models/User.js")
+const Comment = require("../models/Comment.js")
 
 
-
-
+notesRouter.get ('/viewed', async (request, response) => {
+  try{
+  const allNotes= await Note.find({}).sort({views:-1}).limit(10) //tendria que eliminar el body al cargar todas porq se hace muy pesado
+  response.json(allNotes)
+  } catch(error){
+    console.log("Something went wrong: "+error) 
+    response.status(400).end()
+  }})
 
 notesRouter.get('/', async (request, response) => {
   try{
@@ -103,7 +112,6 @@ notesRouter.put('/:id', (request, response)=>{
     likes: note.likes
   }
   Note.findByIdAndUpdate(id, newNote)
-  .then(response => console.log(response))
   .catch((error)=>console.log("error when update;"+error))
 }})
 
@@ -117,6 +125,8 @@ notesRouter.delete('/:id', async (request, response) => {
   user.notes=newUserNotesArray
   user.save()
   await Note.deleteOne({_id: param_id})
+  const deletedCount= await Comment.deleteMany({note: param_id})
+  console.log(deletedCount.deletedCount+" comments deleted")
   console.log("record deleted")
   }
   catch(error){

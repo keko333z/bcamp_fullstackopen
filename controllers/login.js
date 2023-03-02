@@ -1,9 +1,10 @@
-require ("../mongo")
+
+require ("../mongo.js")
 const bcrypt = require('bcrypt')
 require ("dotenv").config()
 const { response } = require("express")
 const loginRouter = require('express').Router()
-const User = require ("../models/User")
+const User = require ("../models/User.js")
 const jwt= require('jsonwebtoken')
 
 
@@ -29,6 +30,7 @@ const token = jwt.sign(userForToken, process.env.SECRET)
 response.send({token: token, name: user.name, username:  user.username, id: user.id, followers: user.followers, following: user.following, password: user.passwordHash, liked: user.liked})
 
 })
+
 
 
 module.exports= loginRouter

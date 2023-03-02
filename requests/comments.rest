@@ -1,0 +1,10 @@
+POST http://localhost:3002/api/comments
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJiYmIiLCJpZCI6IjYzYjQ1YmI4NDM2Nzc3NWQwZDZkMmJkYyIsImlhdCI6MTY3Mjc2NDY0Mn0.prupfNEe5AXUyZqrUlXgriWjLeCwhfiuNkjccDOaKqM
+
+
+{
+    "user": "63b45bb84367775d0d6d2bdc",
+    "body":"uuu",
+    "note": "63ca9ad3d403b40bad3b9640"
+}
