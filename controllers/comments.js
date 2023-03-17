@@ -1,7 +1,7 @@
 
 require ("../mongo.js")
 const express = require('express')
-const  mongoose = require("mongoose")
+//const  mongoose = require("mongoose")
 const commentsRouter = express()
 require('dotenv').config()
 const jwt= require('jsonwebtoken')

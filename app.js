@@ -13,9 +13,7 @@ const User = require ('./models/User.js')
 const Comment = require ('./models/Comment.js')
 const { GraphQLScalarType } = require ('graphql')
 const { ApolloServer, gql, UserInputError } = require('apollo-server-express');
-//import { ApolloServer, gql } from 'apollo-server-express'
-//import Note from './models/Note.cjs'
-//import User from './models/User.cjs'
+
 
 
 
@@ -104,6 +102,7 @@ const resolvers= {
     
   
     },
+    
    Mutation: {
     deleteComment: async (root,args)=>{ 
         try 

@@ -28,11 +28,7 @@ notesRouter.get('/', async (request, response) => {
     console.log("Something went wrong: "+error) 
     response.status(400).end()
   }
-  /*
-  .then(notes =>response.json(notes))
-  .catch((error)=>{
-    console.log("Something went wrong: "+error) 
-    response.status(400).end()})*/
+
 })
 
 
