@@ -1,4 +1,4 @@
-const pass= require ("./password")
+
 require ("dotenv").config()
 const  mongoose = require("mongoose")
 

@@ -1,8 +1,32 @@
 POST http://localhost:3002/api/notes
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJiYmIiLCJpZCI6IjYzYjQ1YmI4NDM2Nzc3NWQwZDZkMmJkYyIsImlhdCI6MTY3Mjc2NDY0Mn0.prupfNEe5AXUyZqrUlXgriWjLeCwhfiuNkjccDOaKqM
+
 
 {
-    "userId": 61 ,
-    "title": "hhhhhhhhhh",
-    "body":"uuuuuuuu"
+    "user": "63b45bb84367775d0d6d2bdc",
+    "title": "hkhk",
+    "body":"hkhkh"  
 }
+
+#####
+
+
+
+PUT http://localhost:3002/api/notes/6387581d73528847f1b54033
+content-type: application/json
+
+{
+     "title": "hhhhhhhhhh",
+    "body":"plplplplplplpl"
+}
+
+###############
+GET http://localhost:3002/api/notes
+
+###############
+GET http://localhost:3002/api/notes/63cab817cde63b84a626b2c9
+
+##################################
+
+GET http://localhost:3002/api/notes/viewed

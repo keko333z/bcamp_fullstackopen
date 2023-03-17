@@ -1,0 +1,42 @@
+POST http://localhost:3002/api/users
+content-type: application/json
+
+{ 
+"username": "zzzz",
+ "name": "zz",
+ "passwordHash": "1234",
+ "notes":[],
+ "followers": [],
+ "following": []
+}
+
+#########
+
+
+PUT http://localhost:3002/api/users/64034438a0e68778fa8ab465
+content-type: application/json
+
+{ 
+ 
+ "username": "aaaa",
+ "name": "aaaa",
+ "passwordHash": "1234",
+ "followers": [],
+ "following": []
+
+}
+
+############
+
+GET http://localhost:3002/api/users
+
+###################
+
+GET http://localhost:3002/api/users/64034438a0e68778fa8ab465
+
+
+################
+
+GET http://localhost:3002/api/comments/userid/6399e937227e44d916672b18
+
+
