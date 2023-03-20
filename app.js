@@ -11,8 +11,10 @@ const commentsRouter = require('./controllers/comments.js')
 const Note = require ('./models/Note.js')
 const User = require ('./models/User.js')
 const Comment = require ('./models/Comment.js')
+const path = require('path')
 const { GraphQLScalarType } = require ('graphql')
 const { ApolloServer, gql, UserInputError } = require('apollo-server-express');
+
 
 
 
@@ -95,7 +97,7 @@ const resolvers= {
         const date =obj.date.toString().substring(0, 15); 
         return newObj = {id: obj.id, user: obj.user, date: date, body: obj.body, note: obj?.note?.title, noteId: obj?.note?.id}
       })   
-      console.log(respcdate)
+      
       return respcdate
     },
 
@@ -138,15 +140,7 @@ app.use(express.json())
 app.use(cors())
 app.use(express.static('build'))
 
-app.get('/', (request, response) => {
-    response.send('<h1>Hello there!</h1>')
-  })
-
-app.get('/info', (request, response) => {
-    let resp='<p>There are '+notes.length+' notes</p><p>'+Date()+'</p>';
-    response.send(resp)
-})
-
+/*app.use('/*', express.static(path.join(__dirname, 'build')))*/
 
 app.use('/api/notes',notesRouter)
 app.use('/api/users',usersRouter)
