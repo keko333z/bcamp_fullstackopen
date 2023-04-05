@@ -53,7 +53,7 @@ const { ApolloServer, gql, UserInputError } = require('apollo-server-express');
         mostViewed: [Note]
         mostLiked: [Note]
         allComments (userid: String!): [Comment]
-        
+        allPosts: [Note]
 
     }
 
@@ -66,6 +66,19 @@ const { ApolloServer, gql, UserInputError } = require('apollo-server-express');
 const resolvers= {
 
     Query: {
+      
+      allPosts: async ()=>{  const resp = await Note.find({}).populate('user', {username:1});
+      
+      const respcdate= resp.map((obj) => 
+       { 
+        const date =obj.date.toString().substring(0, 15); 
+       
+        return newObj = {id: obj.id, user: obj.user.username, date: date, body: obj.body, title: obj.title, views: obj.views, likes: obj.likes}
+      })
+      return respcdate
+        
+      },
+
       mostViewed: async ()=>{  const resp = await Note.find({}).sort({views:-1}).limit(5).populate('user', {username:1});
       
       const respcdate= resp.map((obj) => 
