@@ -1,4 +1,3 @@
-
 require ("../mongo.js")
 const bcrypt = require('bcrypt')
 require ("dotenv").config()
