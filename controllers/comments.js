@@ -69,7 +69,7 @@ commentsRouter.post('/', async (request, response) => {
 
   if(!decodedToken || !token){
     response.send('Inexistent or invalid token ')
-  }
+  } 
   else 
     {
     if(!comment.body){
