@@ -149,7 +149,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '2mb' }));
 
 
 
-app.use(express.json())
+app.use(express.json()) //middleware que transforma la req.body a un json
 app.use(cors())
 app.use(express.static('build'))
 

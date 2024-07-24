@@ -1,5 +1,5 @@
 
-require ("../mongo.js")
+require ("../mongo.js") //realiza la conexion a la db
 const express = require('express')
 //const  mongoose = require("mongoose")
 const commentsRouter = express()
